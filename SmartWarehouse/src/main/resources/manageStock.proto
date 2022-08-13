@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "warehouse_CA.manageStock";
+option java_outer_classname = "manageStockImpl";
+
+package service1;
+
+//Interface exported by the server.
+service manageStock {
+  
+  //rpc method for server streaming calls
+  rpc stockCheck(WarehouseStockRequest) returns (stream WarehouseStockResponse) {}
+  
+  //rpc method for unary calls
+  rpc productConditionChecker(ListRequest) returns (ListResponse){}
+  
+  //rpc method that does not return any response
+  rpc empty(Message) returns (Empty) {}
+    
+}
+
+// define each variable in rpc method separately
+
+message WarehouseStockRequest {
+  string productId = 1;  
+}
+
+message WarehouseStockResponse {
+	string productCount = 1; 
+}
+
+message ListRequest {
+  string productConditionId = 1;
+}
+
+message ListResponse {
+  string productConditionOutput = 1;
+}
+
+// Enum is a complex datatype that may contain other variables
+message Message {
+	enum Enum {
+        UNKNOWN = 0;
+        LOW = 1;
+        HIGH = 2;
+    }
+
+    Enum detail = 1;
+}
+
+message Empty {
+
+}

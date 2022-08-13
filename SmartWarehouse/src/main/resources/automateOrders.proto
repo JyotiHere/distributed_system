@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "warehouse_CA.automateOrders";
+option java_outer_classname = "automateOrdersImpl";
+
+package service1;
+
+// Interface exported by the server.
+service automateOrders {
+
+// rpc method for bidirectional streaming calls
+  rpc  getOrderDetails(stream OrderDetailsRequest) returns (stream OrderDetailsResponse) {}
+  
+  //rpc method for unary calls
+  rpc checkOrderStatus(OrderStatusRequest) returns (OrderStatusResponse){}
+  
+  //rpc method that does not return any response
+  rpc empty(Message) returns (Empty) {}
+
+}
+
+// define each variable in rpc method separately
+
+//Bi-Directional -- Enter product name, will get orderId, OrderDate, DeliveryDate of all orders of that product
+
+message OrderDetailsRequest {
+  string productOrdered = 1;
+}
+
+message OrderDetailsResponse {
+  string orderId = 1;
+  string orderDate = 2;
+  string deliveryDate = 3;
+}
+
+//Unary -- Enter the orderId, will get the order status of that order id
+message OrderStatusRequest {
+  string orderId = 1;
+}
+
+message OrderStatusResponse {
+  string orderStatusOutput = 1;
+}
+
+// Enum is a complex datatype that may contain other variables
+message Message {
+	enum Enum {
+        UNKNOWN = 0;
+        LOW = 1;
+        HIGH = 2;
+    }
+
+    Enum detail = 1;
+}
+
+message Empty {
+
+}

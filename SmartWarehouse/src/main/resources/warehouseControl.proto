@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "warehouse_CA.warehouseControl";
+option java_outer_classname = "warehouseControlImpl";
+
+package service1;
+
+// Interface exported by the server.
+service warehouseControl {
+
+// rpc method for client streaming calls
+  rpc changeTemp(stream TempRequest) returns (TempResponse);
+
+// rpc method for bidirectional streaming calls
+  rpc  turnOnOffLights(stream LightRequest) returns (stream LightResponse) {}
+  
+}
+
+// define each variable in rpc method separately
+
+//Client Streaming -- Enter desired temperature as many times as you want
+
+message TempRequest {
+  	string currentTemperature = 1;
+    string roomId = 2;
+}
+
+message TempResponse {
+  	string correctTemperature = 1;
+}
+
+//Bi-Directional -- Turn on/off lights
+
+message LightRequest {
+  string roomId = 1;
+}
+
+message LightResponse {
+  string lightOnOff = 1; 
+}
+
+
