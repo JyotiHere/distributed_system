@@ -14,7 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.text.html.Option;
 
-//import ds.examples.maths.CalculateRequest.Operation;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
