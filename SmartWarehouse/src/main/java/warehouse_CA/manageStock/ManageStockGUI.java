@@ -104,7 +104,7 @@ public class ManageStockGUI {
 				
 				@Override
 				public void serviceResolved(ServiceEvent event) {
-					System.out.println("Math Service resolved: " + event.getInfo());
+					System.out.println("Manage Stock Service resolved: " + event.getInfo());
 
 					manageStockServiceInfo = event.getInfo();
 
