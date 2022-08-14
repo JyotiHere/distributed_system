@@ -133,12 +133,10 @@ public class AutomateOrdersServer extends automateOrdersImplBase {
 		                // In bidirectional stream, both server and  client would be sending the stream of messages.
 		                // Here, for each message in stream from client, server is sending back one response.
 		                String product = request.getProductOrdered();
-		               // int Temp = request.getTemp1();
-		               // String Persons =request.getOccupant1();
+		              
 		                System.out.println("GET ORDER DETAILS:");
 		                     System.out.println("Product Ordered: " + request.getProductOrdered());    
-		                    // System.out.println("Tempreature status: " + request.getTemp1());
-		                    // System.out.println("Occupants status: " + request.getOccupant1());
+		                    
 		                     		                     		                    		                    
 		                 // Preparing and sending the reply for the client. Here, response is build and with the value (input1.toString()) computed by above logic.
 		                   OrderDetailsResponse reply = OrderDetailsResponse.newBuilder().setOrderId("201").setOrderDate("10/08/2022").setDeliveryDate("15/08/2022").build();

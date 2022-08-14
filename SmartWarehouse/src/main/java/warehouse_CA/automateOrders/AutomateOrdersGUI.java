@@ -1,4 +1,4 @@
-package warehouse_CA.manageStock;
+package warehouse_CA.automateOrders;
 
 
 
@@ -21,8 +21,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 //import warehouse_CA.manageStock.ListRequest.Operation;
-import warehouse_CA.manageStock.manageStockGrpc.manageStockBlockingStub;
-import warehouse_CA.manageStock.manageStockGrpc.manageStockStub;
+import warehouse_CA.automateOrders.automateOrdersGrpc.automateOrdersBlockingStub;
+import warehouse_CA.automateOrders.automateOrdersGrpc.automateOrdersStub;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
@@ -33,18 +33,18 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.awt.event.ActionEvent;
 
-public class ManageStockGUI {
+public class AutomateOrdersGUI {
 
-	private static manageStockBlockingStub blockingStub;
-	private static manageStockStub asyncStub;
+	private static automateOrdersBlockingStub blockingStub;
+	private static automateOrdersStub asyncStub;
 
 	//private ServiceInfo mathServiceInfo;
-	private ServiceInfo manageStockServiceInfo;
+	private ServiceInfo automateOrdersServiceInfo;
 	
 	
 	private JFrame frame;
-	private JTextField textNumber1;
-	private JTextField textNumber2;
+	//private JTextField textNumber1;
+	//private JTextField textNumber2;
 	private JTextArea textResponse ;
 
 	/**
@@ -54,7 +54,7 @@ public class ManageStockGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ManageStockGUI window = new ManageStockGUI();
+					AutomateOrdersGUI window = new AutomateOrdersGUI();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -66,13 +66,13 @@ public class ManageStockGUI {
 	/**
 	 * Create the application.
 	 */
-	public ManageStockGUI() {
+	public AutomateOrdersGUI() {
 		
-		String manageStock_service_type = "_manageStock._tcp.local.";
-		discoverManageStockService(manageStock_service_type);
+		String automateOrders_service_type = "_automateOrders._tcp.local.";
+		discoverAutomateOrdersService(automateOrders_service_type);
 		
-		String host = manageStockServiceInfo.getHostAddresses()[0];
-		int port = manageStockServiceInfo.getPort();
+		String host = automateOrdersServiceInfo.getHostAddresses()[0];
+		int port = automateOrdersServiceInfo.getPort();
 		
 		ManagedChannel channel = ManagedChannelBuilder
 				.forAddress(host, port)
@@ -80,9 +80,9 @@ public class ManageStockGUI {
 				.build();
 
 		//stubs -- generate from proto
-		blockingStub = manageStockGrpc.newBlockingStub(channel);
+		blockingStub = automateOrdersGrpc.newBlockingStub(channel);
 
-		asyncStub = manageStockGrpc.newStub(channel);
+		asyncStub = automateOrdersGrpc.newStub(channel);
 
 		
 		initialize();
@@ -90,7 +90,7 @@ public class ManageStockGUI {
 
 	
 	
-	private void discoverManageStockService(String service_type) {
+	private void discoverAutomateOrdersService(String service_type) {
 		
 		
 		try {
@@ -102,32 +102,32 @@ public class ManageStockGUI {
 				
 				@Override
 				public void serviceResolved(ServiceEvent event) {
-					System.out.println("Manage Stock Service resolved: " + event.getInfo());
+					System.out.println("Automate Orders Service resolved: " + event.getInfo());
 
-					manageStockServiceInfo = event.getInfo();
+					automateOrdersServiceInfo = event.getInfo();
 
-					int port = manageStockServiceInfo.getPort();
+					int port = automateOrdersServiceInfo.getPort();
 					
 					System.out.println("resolving " + service_type + " with properties ...");
 					System.out.println("\t port: " + port);
 					System.out.println("\t type:"+ event.getType());
 					System.out.println("\t name: " + event.getName());
-					System.out.println("\t description/properties: " + manageStockServiceInfo.getNiceTextString());
-					System.out.println("\t host: " + manageStockServiceInfo.getHostAddresses()[0]);
+					System.out.println("\t description/properties: " + automateOrdersServiceInfo.getNiceTextString());
+					System.out.println("\t host: " + automateOrdersServiceInfo.getHostAddresses()[0]);
 				
 					
 				}
 				
 				@Override
 				public void serviceRemoved(ServiceEvent event) {
-					System.out.println("Manage Stock Service removed: " + event.getInfo());
+					System.out.println("Automate Orders Service removed: " + event.getInfo());
 
 					
 				}
 				
 				@Override
 				public void serviceAdded(ServiceEvent event) {
-					System.out.println("Manage Stock Service added: " + event.getInfo());
+					System.out.println("Automate Orders Service added: " + event.getInfo());
 
 					
 				}
@@ -168,27 +168,27 @@ public class ManageStockGUI {
 		frame.getContentPane().add(panel_service_1);
 		panel_service_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JLabel lblNewLabel_1 = new JLabel("Number 1");
-		panel_service_1.add(lblNewLabel_1);
+//		JLabel lblNewLabel_1 = new JLabel("Number 1");
+//		panel_service_1.add(lblNewLabel_1);
 		
-		textNumber1 = new JTextField();
-		panel_service_1.add(textNumber1);
-		textNumber1.setColumns(10);
+//		textNumber1 = new JTextField();
+//		panel_service_1.add(textNumber1);
+//		textNumber1.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("Number 2");
-		panel_service_1.add(lblNewLabel_2);
-		
-		textNumber2 = new JTextField();
-		panel_service_1.add(textNumber2);
-		textNumber2.setColumns(10);
+//		JLabel lblNewLabel_2 = new JLabel("Number 2");
+//		panel_service_1.add(lblNewLabel_2);
+//		
+//		textNumber2 = new JTextField();
+//		panel_service_1.add(textNumber2);
+//		textNumber2.setColumns(10);
 		
 		
 		JComboBox comboOperation = new JComboBox();
-		comboOperation.setModel(new DefaultComboBoxModel(new String[] {"Item1", "Item2", "Item3", "WrongItem"}));
+		comboOperation.setModel(new DefaultComboBoxModel(new String[] {"101", "102", "103", "WrongOrderID"}));
 		panel_service_1.add(comboOperation);
 	
 		
-		JButton btnCalculate = new JButton("productConditionChecker");
+		JButton btnCalculate = new JButton("checkOrderStatus");
 		btnCalculate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -197,18 +197,15 @@ public class ManageStockGUI {
 
 				//int index = comboOperation.getSelectedIndex();
 				//Operation operation = Operation.forNumber(index);
-				
-				//WarehouseStockRequest req = WarehouseStockRequest.newBuilder().setNumber1(num1).setNumber2(num2).setOperation(operation).build();
-				ListRequest req = ListRequest.newBuilder().setProductConditionId("Item1").build();
 
-				//WarehouseStockResponse response = blockingStub.stockCheck(req);
-				ListResponse response = blockingStub.productConditionChecker(req);
+				OrderStatusRequest req = OrderStatusRequest.newBuilder().setOrderId("102").build();
+				OrderStatusResponse response = blockingStub.checkOrderStatus(req);
 
 				//textResponse.append("reply:"+ response.getResult() + " mes:"+ response.getMessage() + "\n");
-				textResponse.append("reply:" + response.getProductConditionOutput());
+				textResponse.append("reply:" + response.getOrderStatusOutput());
 				
 				//System.out.println("res: " + response.getResult() + " mes: " + response.getMessage());
-				System.out.println(response.getProductConditionOutput());
+				System.out.println(response.getOrderStatusOutput());
 
 			}
 		});
