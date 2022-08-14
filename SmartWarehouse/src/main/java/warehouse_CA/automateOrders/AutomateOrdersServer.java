@@ -140,8 +140,10 @@ public class AutomateOrdersServer extends automateOrdersImplBase {
 		                     		                     		                    		                    
 		                 // Preparing and sending the reply for the client. Here, response is build and with the value (input1.toString()) computed by above logic.
 		                   OrderDetailsResponse reply = OrderDetailsResponse.newBuilder().setOrderId("201").setOrderDate("10/08/2022").setDeliveryDate("15/08/2022").build();
+		                   OrderDetailsResponse reply1 = OrderDetailsResponse.newBuilder().setOrderId("20002").setOrderDate("18/07/2022").setDeliveryDate("20/08/2022").build();
 		              
 		                    responseObserver.onNext(reply);
+		                    responseObserver.onNext(reply1);
 		                
 		            }
 
@@ -190,7 +192,7 @@ public class AutomateOrdersServer extends automateOrdersImplBase {
 					
 					System.out.print("receiving order status.....\n ");
 					
-					
+					OrderStatusResponse reply = null;
 					 String orderId = request.getOrderId();
 			            String orderId1 = "101";
 			            String orderId2 = "102";
@@ -200,10 +202,13 @@ public class AutomateOrdersServer extends automateOrdersImplBase {
 			            String status3 = "at transit!";
 			            String status4 = "Delivered!";
 			             if(orderId.equals(orderId1)) {
+			            	  reply = OrderStatusResponse.newBuilder().setOrderStatusOutput(status1).build();
 			                 System.out.println("The order with order ID " + orderId1 + " is "  + status1);
 			             }else if(orderId.equals(orderId2)){
+			            	 reply = OrderStatusResponse.newBuilder().setOrderStatusOutput(status2).build();
 			                 System.out.println("The order with order ID " + orderId2 + " is "  + status2);
 			             }else if(orderId.equals(orderId3)) {
+			            	  reply = OrderStatusResponse.newBuilder().setOrderStatusOutput(status3).build();
 			            	 System.out.println("The order with order ID " + orderId3 + " is "  + status3);
 			             }else {
 			            	 System.out.println("Incorrect order ID entered!");
@@ -211,7 +216,8 @@ public class AutomateOrdersServer extends automateOrdersImplBase {
 			
 					
 					// Preparing the reply for the client. Here, response is build and with the value (output) computed by above logic.  
-			             OrderStatusResponse reply = OrderStatusResponse.newBuilder().setOrderStatusOutput(orderId1).build();
+			          //   OrderStatusResponse reply = OrderStatusResponse.newBuilder().setOrderStatusOutput(status1).build();
+			             
 					
 					// Sending the reply for each request.
 					responseObserver.onNext(reply);

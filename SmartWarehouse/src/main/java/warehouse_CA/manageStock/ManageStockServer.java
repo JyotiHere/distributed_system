@@ -149,12 +149,18 @@ public class ManageStockServer extends manageStockImplBase {
 	                int count3 = (bought3 - sold3);
 	                
 	                if (products.equals(product1)) {
-	                    System.out.println("Total count of product for requested product Id is: " + count1 );
+	                	System.out.println("Total count of this product bought: " + bought1);
+	                	System.out.println("Total count of this product sold until now: " + sold1);
+	                    System.out.println("Total  current count of the product for requested product Id is: " + count1 );
 	                }else if
 	                    (products.equals(product2)){
+	                	System.out.println("Total count of this product bought: " + bought2);
+	                	System.out.println("Total count of this product sold until now: " + sold2);
 	                    System.out.println("Total count of product for requested product Id is: " + count2);
 	                }else if
 	                    (products.equals(product3)) {
+	                	System.out.println("Total count of this product bought: " + bought3);
+	                	System.out.println("Total count of this product sold until now: " + sold3);
 	                    System.out.println("Total count of product for requested product Id is: " + count3);    
 	                }
 	        
