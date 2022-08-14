@@ -12,6 +12,10 @@ import javax.jmdns.ServiceListener;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.text.html.Option;
+
+//import ds.examples.maths.CalculateRequest.Operation;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -168,19 +172,6 @@ public class AutomateOrdersGUI {
 		frame.getContentPane().add(panel_service_1);
 		panel_service_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-//		JLabel lblNewLabel_1 = new JLabel("Number 1");
-//		panel_service_1.add(lblNewLabel_1);
-		
-//		textNumber1 = new JTextField();
-//		panel_service_1.add(textNumber1);
-//		textNumber1.setColumns(10);
-		
-//		JLabel lblNewLabel_2 = new JLabel("Number 2");
-//		panel_service_1.add(lblNewLabel_2);
-//		
-//		textNumber2 = new JTextField();
-//		panel_service_1.add(textNumber2);
-//		textNumber2.setColumns(10);
 		
 		
 		JComboBox comboOperation = new JComboBox();
@@ -192,11 +183,8 @@ public class AutomateOrdersGUI {
 		btnCalculate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//int num1 = Integer.parseInt(textNumber1.getText());
-				//int num2 = Integer.parseInt(textNumber2.getText());
-
-				//int index = comboOperation.getSelectedIndex();
-				//Operation operation = Operation.forNumber(index);
+//				int index = comboOperation.getSelectedIndex();
+//				Option operation = Option.forNumber(index);
 
 				OrderStatusRequest req = OrderStatusRequest.newBuilder().setOrderId("102").build();
 				OrderStatusResponse response = blockingStub.checkOrderStatus(req);
